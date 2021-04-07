@@ -34,21 +34,23 @@
 
 
       function askForCoords() {
-         
             progressBar.value = 20;
             navigator.geolocation.getCurrentPosition(geoSuccessHandler, geoErrorHandler);
-         
-         
       }
-
+      
       function geoSuccessHandler(position) {
                const mapDiv = document.querySelector('.map-div');
                const latitude = position.coords.latitude;
                const longitude = position.coords.longitude;
-               progressBar.value = 80;
-               progressContainer.classList.add('hide');
+              
                mapDiv.innerHTML = `<iframe width="100%" height="235px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=236px&amp;hl=uk&amp;q=${latitude},%20${longitude}+(My%20Business%20Name)&amp;f=l&amp;mrt=loc&amp;t=m&amp;z=15&amp;ie=UTF8&amp;msa=1&amp;output=embed"></iframe>`;
-               mapDiv.classList.remove('hide'); 
+               
+
+               progressBar.value = 80;
+               setTimeout(() => {
+                  progressContainer.classList.add('hide');
+                  mapDiv.classList.remove('hide'); 
+               },1000);
             
             }
 
