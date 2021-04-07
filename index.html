@@ -34,10 +34,10 @@
 
 
       function askForCoords() {
-         setTimeout(() => {
+         
             progressBar.value = 20;
             navigator.geolocation.getCurrentPosition(geoSuccessHandler, geoErrorHandler);
-         },1000);
+         
          
       }
 
