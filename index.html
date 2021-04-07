@@ -10,33 +10,63 @@
          margin: 0;
          padding: 0;
          background-color: rgb(8, 8, 8);
+         color: white;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+      }
+      .hide {
+         display: none;
       }
    </style>
    </head>
 <body>
-   <div class="map-div" style="width: 100%"></div>
-   <script>
+      <div class="progress">
+         <h1>Loading</h1>
+         <progress class="progress-bar" value = "0" max = "100"/>
+      </div>
+     
 
-      function geoErrorHandler() {
-         alert('Error of location')
-      }
+   <div class="map-div hide" style="width: 100%"></div>
+   <script>
+      const progressContainer = document.querySelector('.progress')
+      const progressBar = document.querySelector('.progress-bar');
+
 
       function askForCoords() {
-         navigator.geolocation.getCurrentPosition(geoSuccessHandler, geoErrorHandler);
+         setTimeout(() => {
+            progressBar.value = 20;
+            navigator.geolocation.getCurrentPosition(geoSuccessHandler, geoErrorHandler);
+         },200);
+         
       }
 
       function geoSuccessHandler(position) {
                const mapDiv = document.querySelector('.map-div');
                const latitude = position.coords.latitude;
                const longitude = position.coords.longitude;
-               mapDiv.innerHTML = `<iframe width="100%" height="235px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=236px&amp;hl=uk&amp;q=${latitude},%20${longitude}+(My%20Business%20Name)&amp;f=l&amp;mrt=loc&amp;t=m&amp;z=15&amp;ie=UTF8&amp;msa=1&amp;output=embed"></iframe>`;
-
+               progressBar.value = 40;
+               setTimeout(() => {
+                  progressBar.value = 80;
+                  setTimeout(() => {
+                  progressContainer.classList.add('hide');
+                  mapDiv.innerHTML = `<iframe width="100%" height="235px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=236px&amp;hl=uk&amp;q=${latitude},%20${longitude}+(My%20Business%20Name)&amp;f=l&amp;mrt=loc&amp;t=m&amp;z=15&amp;ie=UTF8&amp;msa=1&amp;output=embed"></iframe>`;
+                  mapDiv.classList.remove('hide');
+                  },200);
+               },200);
+            
+               
             }
-         function init() {
+
+      function geoErrorHandler() {
+         alert('Error of location')
+      }
+
+      function init() {
             askForCoords();
          }
 
-         init();
+      init();
    </script>
 </body>
 </html>
