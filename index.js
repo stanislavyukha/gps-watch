@@ -1,10 +1,14 @@
 let map;
 let markers = [];
+const progressContainer = document.querySelector('.progress');
+const progressBar = document.querySelector('.progress-bar');
+const mapDiv = document.querySelector('.map');
+
 
 function initMap() {
-    let coordinates = {};
+    progressBar.value = 20;
     navigator.geolocation.getCurrentPosition((position) => {
-        coordinates = {
+        let coordinates = {
             lat: position.coords.latitude,
             lng: position.coords.longitude
         }
@@ -21,8 +25,11 @@ function initMap() {
         });
         
         marker.setMap(map);
-        
-        
+        progressBar.value = 80;
+        setTimeout(() => {
+          progressContainer.classList.add('hide');
+          mapDiv.classList.remove('hide');
+        }, 1000);
     }, () => {
         console.log('no geo access');
     });
