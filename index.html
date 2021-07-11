@@ -1,86 +1,84 @@
 <!DOCTYPE html>
 <html lang="ua">
-<head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Maps</title>
-   <style>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maps</title>
+    <style>
       body {
-         margin: 0;
-         padding: 0;
-         background-color: rgb(8, 8, 8);
-         color: white;
-         display: flex;
-         justify-content: center;
-         align-items: center;
+        margin: 0;
+        padding: 0;
+        background-color: rgb(8, 8, 8);
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
       progress {
-         border: 1px solid #fff;
-         border-radius: 6px; 
-         text-align: start;
-
+        border: 1px solid #fff;
+        border-radius: 6px;
+        text-align: start;
       }
       progress::-webkit-progress-bar {
-         background-color: black;
-         border-radius: 6px;
+        background-color: black;
+        border-radius: 6px;
       }
       progress::-webkit-progress-value {
-         background-color: rgb(5, 176, 255);
-         border-radius: 6px;
+        background-color: rgb(5, 176, 255);
+        border-radius: 6px;
       }
       .progress h1 {
-         text-align: center;
+        text-align: center;
       }
-     
-      .hide {
-         display: none;
-      }
-   </style>
-   </head>
-<body>
-      <div class="progress">
-         <h1>Loading</h1>
-         <progress class="progress-bar" value = "0" max = "100"/>
-      </div>
-     
 
-   <div class="map-div hide" style="width: 100%"></div>
-   <script>
-      const progressContainer = document.querySelector('.progress')
+      .hide {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="progress">
+      <h1>Loading</h1>
+      <progress class="progress-bar" value="0" max="100" />
+    </div>
+
+    <div class="map-div hide" style="width: 100%"></div>
+    <script>
+      const progressContainer = document.querySelector('.progress');
       const progressBar = document.querySelector('.progress-bar');
 
-
       function askForCoords() {
-            progressBar.value = 20;
-            navigator.geolocation.getCurrentPosition(geoSuccessHandler, geoErrorHandler);
+        progressBar.value = 20;
+        navigator.geolocation.getCurrentPosition(
+          geoSuccessHandler,
+          geoErrorHandler
+        );
       }
-      
-      function geoSuccessHandler(position) {
-               const mapDiv = document.querySelector('.map-div');
-               const latitude = position.coords.latitude;
-               const longitude = position.coords.longitude;
-              
-               mapDiv.innerHTML = `<iframe width="100%" height="235px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=236px&amp;hl=uk&amp;q=${latitude},%20${longitude}+(My%20Business%20Name)&amp;f=l&amp;mrt=loc&amp;t=m&amp;z=15&amp;ie=UTF8&amp;msa=1&amp;output=embed"></iframe>`;
-               
 
-               progressBar.value = 80;
-               setTimeout(() => {
-                  progressContainer.classList.add('hide');
-                  mapDiv.classList.remove('hide'); 
-               },1000);
-            
-            }
+      function geoSuccessHandler(position) {
+        const mapDiv = document.querySelector('.map-div');
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+
+        mapDiv.innerHTML = `<iframe width="100%" height="264px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=236px&amp;hl=uk&amp;q=${latitude},%20${longitude}+(My%20Business%20Name)&amp;f=l&amp;mrt=loc&amp;t=m&amp;z=15&amp;ie=UTF8&amp;msa=1&amp;output=embed"></iframe>`;
+
+        progressBar.value = 80;
+        setTimeout(() => {
+          progressContainer.classList.add('hide');
+          mapDiv.classList.remove('hide');
+        }, 1000);
+      }
 
       function geoErrorHandler() {
-         alert('Error of location')
+        alert('Error of location');
       }
 
       function init() {
-            askForCoords();
-         }
+        askForCoords();
+      }
 
       init();
-   </script>
-</body>
+    </script>
+  </body>
 </html>
