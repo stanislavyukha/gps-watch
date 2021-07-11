@@ -29,7 +29,7 @@ function initMap() {
         setTimeout(() => {
           progressContainer.classList.add('hide');
           mapContainer.classList.remove('hide');
-          mapContainer.style.position = 'static';
+        //   mapContainer.style.position = 'static';
         }, 1000);
     }, () => {
         console.log('no geo access');
