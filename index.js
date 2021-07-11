@@ -19,7 +19,7 @@ function initMap() {
             zoomControl: true,
             mapTypeControl: true,
           });
-          var marker = new google.maps.Marker({
+          const marker = new google.maps.Marker({
             position: coordinates,
             title:"You are here"
         });
