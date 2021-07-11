@@ -16,6 +16,7 @@ function initMap() {
             zoom: 15,
             center: coordinates,
             disableDefaultUI: true,
+            zoomControl: true,
           });
           const marker = new google.maps.Marker({
             position: coordinates,
