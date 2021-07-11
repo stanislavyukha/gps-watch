@@ -2,7 +2,7 @@ let map;
 let markers = [];
 const progressContainer = document.querySelector('.progress');
 const progressBar = document.querySelector('.progress-bar');
-const mapDiv = document.querySelector('.map');
+const mapContainer = document.querySelector('.map');
 
 
 function initMap() {
@@ -28,7 +28,8 @@ function initMap() {
         progressBar.value = 80;
         setTimeout(() => {
           progressContainer.classList.add('hide');
-          mapDiv.classList.remove('hide');
+          mapContainer.classList.remove('hide');
+          mapContainer.style.position = 'static';
         }, 1000);
     }, () => {
         console.log('no geo access');
